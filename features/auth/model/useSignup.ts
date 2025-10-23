@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 import { SignupFormData, AUTH_PATTERNS } from '@/entities/auth/model';
 
 export const useSignup = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -23,9 +26,25 @@ export const useSignup = () => {
 
   const password = watch('password');
 
+  // TODO: 실제 API 호출로 회원가입 처리
+  // const onSubmit = async (data: SignupFormData) => {
+  //   try {
+  //     const response = await signupApi(data);
+  //     if (response.success) {
+  //       router.push('/signup/success');
+  //     } else {
+  //       // 에러 처리
+  //     }
+  //   } catch (error) {
+  //     // 에러 처리
+  //   }
+  // };
+
   const onSubmit = (data: SignupFormData) => {
     console.log('회원가입 데이터:', data);
-    alert('회원가입이 완료되었습니다!');
+
+    // 성공 시 성공 페이지로 리다이렉트
+    router.push('/signup/success');
   };
 
   const registerOptions = {
